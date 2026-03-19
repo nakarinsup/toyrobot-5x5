@@ -29,7 +29,8 @@ public class ToyRobotMain {
 
             String command = scanner.nextLine();
 
-            if (command.toUpperCase().startsWith("PLACE")) {
+            //compare "PLACE " with whitespace afterward is intended for ensure the command must exactly be "PLACE" (ignore case)
+            if (command.toUpperCase().startsWith("PLACE ")) {
                 if (RobotUtility.placeRobot(command, robot)) {
                     shouldRefresh = true;
                 } else {
@@ -37,9 +38,11 @@ public class ToyRobotMain {
                     System.out.println("Example valid PLACE command : \"PLACE 2,3,EAST\" ");
                     shouldRefresh = false;
                 }
-            } else if (command.equalsIgnoreCase("REPORT") || command.equalsIgnoreCase("MOVE") || command.equalsIgnoreCase("LEFT") || command.equalsIgnoreCase("RIGHT")) {
+            } else if (command.equalsIgnoreCase("REPORT") || command.equalsIgnoreCase("MOVE") ||
+                    command.equalsIgnoreCase("LEFT") || command.equalsIgnoreCase("RIGHT")) {
+
                 if (!RobotUtility.isRobotValid(robot)) {
-                    System.out.println("PLACE command must be issued first");
+                    System.out.println("PLACE command must be executed first");
                     shouldRefresh = false;
                 } else if (command.equalsIgnoreCase("REPORT")) {
                     System.out.println("Robot current position is : " + robot.getPosX() + ", " + robot.getPosY() + ", " + robot.getFacingDirection());

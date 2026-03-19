@@ -72,7 +72,7 @@ public class RobotUtility {
         return false;
     }
 
-    /** issue robot to turn left
+    /** execute robot to turn left
      *
      * @param robot
      */
@@ -88,7 +88,7 @@ public class RobotUtility {
         }
     }
 
-    /** issue robot to turn right
+    /** execute robot to turn right
      *
      * @param robot
      */
@@ -109,10 +109,15 @@ public class RobotUtility {
      * place the robot on the table
      *
      * @param command String command from user input, format is "PLACE x,y,f" where x, y are integers and f is robot facing compass direction
-     * @param robot robot object to set position and orientation (facing direction)
+     * @param robot robot object to be placed by set position and orientation (facing direction)
      * @return true if placing success
      */
     public static boolean placeRobot(String command, Robot robot){
+        //compare "PLACE " with whitespace afterward is intended for ensure the command must exactly be "PLACE" (ignore case)
+        if(!command.toUpperCase().startsWith("PLACE ")){
+            return false;
+        }
+
         String[] posXYF = command.substring(6).split(",");  //substring start index 6 to skip "place<space>"
         if(posXYF.length != 3 ){
             return false;
