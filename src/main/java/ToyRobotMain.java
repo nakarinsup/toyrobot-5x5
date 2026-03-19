@@ -24,10 +24,10 @@ public class ToyRobotMain {
         do {
             if (shouldRefresh) {
                 screen.draw(robot);
-                System.out.print(strBuffer.toString());
+                System.out.print(strBuffer);
             }
 
-            String command = scanner.nextLine();
+            String command = scanner.nextLine().trim();
 
             //compare "PLACE " with whitespace afterward is intended for ensure the command must exactly be "PLACE" (ignore case)
             if (command.toUpperCase().startsWith("PLACE ")) {
@@ -46,6 +46,7 @@ public class ToyRobotMain {
                     shouldRefresh = false;
                 } else if (command.equalsIgnoreCase("REPORT")) {
                     System.out.println("Robot current position is : " + robot.getPosX() + ", " + robot.getPosY() + ", " + robot.getFacingDirection());
+                    shouldRefresh = false;
                 } else if (command.equalsIgnoreCase("MOVE")) {
                     boolean moveSuccess = robot.moveForward();
                     if (moveSuccess) {
@@ -75,7 +76,7 @@ public class ToyRobotMain {
     }
 
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         toyRobotRun();
     }
 }
