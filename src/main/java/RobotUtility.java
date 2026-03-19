@@ -11,18 +11,19 @@ public class RobotUtility {
      * @param robot
      * @return true if valid
      */
-    public static boolean isRobotValid(Robot robot){
+    public static boolean isRobotValid(Robot robot) {
         return isRobotPositionValid(robot.getPosX(), robot.getPosY()) && robot.getFacingDirection() != null;
     }
 
     /**
      * check if robot position is valid
+     *
      * @param posX
      * @param posY
      * @return true if valid
      */
-    public static boolean isRobotPositionValid(int posX, int posY){
-        if(posX < 0 || posX >= 5 || posY < 0 || posY >= 5){
+    public static boolean isRobotPositionValid(int posX, int posY) {
+        if (posX < 0 || posX >= 5 || posY < 0 || posY >= 5) {
             return false;
         }
         return true;
@@ -72,34 +73,36 @@ public class RobotUtility {
         return false;
     }
 
-    /** execute robot to turn left
+    /**
+     * execute robot to turn left
      *
      * @param robot
      */
-    public static void turnLeftRobot(Robot robot){
-        if(robot.getFacingDirection() == Robot.CompassDirection.NORTH){
+    public static void turnLeftRobot(Robot robot) {
+        if (robot.getFacingDirection() == Robot.CompassDirection.NORTH) {
             robot.setFacingDirection(Robot.CompassDirection.WEST);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.WEST){
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.WEST) {
             robot.setFacingDirection(Robot.CompassDirection.SOUTH);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.SOUTH){
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.SOUTH) {
             robot.setFacingDirection(Robot.CompassDirection.EAST);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.EAST) {
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.EAST) {
             robot.setFacingDirection(Robot.CompassDirection.NORTH);
         }
     }
 
-    /** execute robot to turn right
+    /**
+     * execute robot to turn right
      *
      * @param robot
      */
-    public static void turnRightRobot(Robot robot){
-        if(robot.getFacingDirection() == Robot.CompassDirection.NORTH){
+    public static void turnRightRobot(Robot robot) {
+        if (robot.getFacingDirection() == Robot.CompassDirection.NORTH) {
             robot.setFacingDirection(Robot.CompassDirection.EAST);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.EAST){
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.EAST) {
             robot.setFacingDirection(Robot.CompassDirection.SOUTH);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.SOUTH){
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.SOUTH) {
             robot.setFacingDirection(Robot.CompassDirection.WEST);
-        }else if(robot.getFacingDirection() == Robot.CompassDirection.WEST) {
+        } else if (robot.getFacingDirection() == Robot.CompassDirection.WEST) {
             robot.setFacingDirection(Robot.CompassDirection.NORTH);
         }
     }
@@ -109,17 +112,17 @@ public class RobotUtility {
      * place the robot on the table
      *
      * @param command String command from user input, format is "PLACE x,y,f" where x, y are integers and f is robot facing compass direction
-     * @param robot robot object to be placed by set position and orientation (facing direction)
+     * @param robot   robot object to be placed by set position and orientation (facing direction)
      * @return true if placing success
      */
-    public static boolean placeRobot(String command, Robot robot){
+    public static boolean placeRobot(String command, Robot robot) {
         //compare "PLACE " with whitespace afterward is intended for ensure the command must exactly be "PLACE" (ignore case)
-        if(!command.toUpperCase().startsWith("PLACE ")){
+        if (!command.toUpperCase().startsWith("PLACE ")) {
             return false;
         }
 
         String[] posXYF = command.substring(6).split(",");  //substring start index 6 to skip "place<space>"
-        if(posXYF.length != 3 ){
+        if (posXYF.length != 3) {
             return false;
         }
 
@@ -127,30 +130,38 @@ public class RobotUtility {
         int posY = -1;
         Robot.CompassDirection facingDirection = null;
 
-        try{
+        try {
             posX = Integer.parseInt(posXYF[0].trim());
             posY = Integer.parseInt(posXYF[1].trim());
 
-            if(!isRobotPositionValid(posX, posY)){
+            if (!isRobotPositionValid(posX, posY)) {
                 return false;
             }
 
             String directionLetter = posXYF[2].trim().toUpperCase(Locale.ENGLISH);
-            if( !directionLetter.equals("NORTH") && !directionLetter.equals("WEST")
+            if (!directionLetter.equals("NORTH") && !directionLetter.equals("WEST")
                     && !directionLetter.equals("EAST") && !directionLetter.equals("SOUTH")
                     && !directionLetter.equals("N") && !directionLetter.equals("W")
-                    && !directionLetter.equals("E") && !directionLetter.equals("S")){
+                    && !directionLetter.equals("E") && !directionLetter.equals("S")) {
                 return false;
             }
 
-            switch(directionLetter.charAt(0)){
-                case 'N': facingDirection = Robot.CompassDirection.NORTH; break;
-                case 'W': facingDirection = Robot.CompassDirection.WEST; break;
-                case 'E': facingDirection = Robot.CompassDirection.EAST; break;
-                case 'S': facingDirection = Robot.CompassDirection.SOUTH; break;
+            switch (directionLetter.charAt(0)) {
+                case 'N':
+                    facingDirection = Robot.CompassDirection.NORTH;
+                    break;
+                case 'W':
+                    facingDirection = Robot.CompassDirection.WEST;
+                    break;
+                case 'E':
+                    facingDirection = Robot.CompassDirection.EAST;
+                    break;
+                case 'S':
+                    facingDirection = Robot.CompassDirection.SOUTH;
+                    break;
             }
 
-        }catch(NumberFormatException | NullPointerException | IndexOutOfBoundsException e){
+        } catch (NumberFormatException | NullPointerException | IndexOutOfBoundsException e) {
             return false;
         }
 

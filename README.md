@@ -34,12 +34,12 @@ REPORT
 q - quit, for exit program
 ```
 
-the text graphical show table with 5x5 grid where each cell is possible location can be placed on the table (top view).
+the text graphical show table with 5x5 grid where each cell is possible location that a robot can be placed on the table (top view).
 You can enter command by typing the command. start with place robot first
 
 for example:  
 `PLACE 2,3,EAST`  
-every place command will reset the robot location and its heading according to the latest command.  
+Note: every place command will reset the robot location and its heading according to the latest command.  
 
 For compass direction, you can also enter `N`, `E`, `W`, `S` for short. For example:  
 `PLACE 2,3,E`  
@@ -62,11 +62,55 @@ To exit program, can type command as follows:\
 
 # Example of playing around
 
-start with PLACE command to put the robot on the table
+From the starting of the app, we have not place a robot yet. The console screen is: 
+``` 
+-------------------------------
+|     |     |     |     |     |
+-------------------------------
+|     |     |     |     |     |
+-------------------------------
+|     |     |     |     |     |
+-------------------------------
+|     |     |     |     |     |
+-------------------------------
+|     |     |     |     |     |
+-------------------------------
+Please enter robot command
+PLACE x,y,f
+MOVE
+LEFT
+RIGHT
+REPORT
+q - quit, for exit program
+```
 
+
+If we send any command beside from PLACE command, will result in error message print out, as examples below:   
+
+Input:   
+`REPORT`   
+Output:  
+`PLACE command must be executed first`    
+
+Input:   
+`MOVE`  
+Output:   
+`PLACE command must be executed first`   
+
+Input:   
+`LEFT`   
+Output:   
+`PLACE command must be executed first`   
+
+Input:   
+`RIGHT`   
+Output:   
+`PLACE command must be executed first`   
+
+We must start with PLACE command to put the robot on the table. Let's place the robot on the position(2,3) where facing toward east:   
 `PLACE 2,3,EAST`
 
-Then this screen will be shown up
+Then this screen will be shown up:   
 
 ```
 -------------------------------
@@ -157,8 +201,8 @@ let's report again
 console will print the new heading direction:   
 `Robot current position is : 3, 3, NORTH`
 
-let's moving forward
-`MOVE`
+let's moving forward   
+`MOVE`   
 console will update the location:   
 ``` 
 -------------------------------
@@ -181,18 +225,18 @@ REPORT
 q - quit, for exit program 
 ```
 
-As the robot is at the edge of the table area, with the current heading toward north, it cannot moving forward further, let's try and see:
-`MOVE`
+As the robot is at the edge of the table area, with the current heading toward north, it cannot moving forward further, let's try and see:   
+`MOVE`  
 
 Console will print the error and command is discarded/ignored
 `MOVE command is ignored because robot will fall from table!!!`
 
-Let's report again
-`REPORT`  
+Let's report again   
+`REPORT`   
 Output:  
 `Robot current position is : 3, 4, NORTH`
 
-From here, we can turn the robot to another direction, let turn right   
+From here, we can turn the robot to another direction. Let's turn right   
 `RIGHT`  
 Output:
 
@@ -217,7 +261,7 @@ REPORT
 q - quit, for exit program
 ```
 
-Then the robot can move forward (to the east now):
+Then the robot can move forward (to the east now):   
 `MOVE`   
 Output:
 ```
@@ -245,7 +289,7 @@ q - quit, for exit program
 Output:   
 `Robot current position is : 4, 4, EAST`   
 
-Try move forward further, but cannot because we are at the corner of the table
+Try move forward further, but cannot because we are at the corner of the table   
 `MOVE`   
 Output:  
 `MOVE command is ignored because robot will fall from table!!!`
@@ -275,13 +319,13 @@ q - quit, for exit program
 
 ```
 
-We cannot moving forward yet, let's see:
+We cannot moving forward yet, let's see:   
 `MOVE`   
 Output:   
 `MOVE command is ignored because robot will fall from table!!!`   
 
 Turn left one more time:   
-`LEFT`
+`LEFT`   
 Output:   
 ```
 -------------------------------
@@ -331,6 +375,14 @@ LEFT
 RIGHT
 REPORT
 q - quit, for exit program
+```
+
+Let's see if we try to place the robot on the new **invalid** location:   
+`PLACE 5,5,NORTH`   
+The error will print out as belows:   
+``` 
+PLACE command invalid, x, y must be 0-4, facing direction can be 'NORTH', 'EAST', 'WEST', 'SOUTH'
+Example valid PLACE command : "PLACE 2,3,EAST"
 ```
 
 That's all for the demo.

@@ -34,7 +34,7 @@ public class ToyRobotMain {
                 if (RobotUtility.placeRobot(command, robot)) {
                     shouldRefresh = true;
                 } else {
-                    System.out.println("PLACE command invalid, x, y must be 0-5, facing direction can be 'NORTH', 'EAST', 'WEST', 'SOUTH'");
+                    System.out.println("PLACE command invalid, x, y must be 0-4, facing direction can be 'NORTH', 'EAST', 'WEST', 'SOUTH'");
                     System.out.println("Example valid PLACE command : \"PLACE 2,3,EAST\" ");
                     shouldRefresh = false;
                 }
